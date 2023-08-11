@@ -58,7 +58,7 @@ public class Estado extends Movimiento {
         int random_estado= rng.nextInt(4)+1;
        int random=rng.nextInt(100)+1;
        
-        if (random>0 && random<=100) {
+        if (random>0 && random<=75) {
             
             switch (random_estado) {
                 case 1:

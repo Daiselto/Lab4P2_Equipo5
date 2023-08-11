@@ -6,6 +6,8 @@ package lab4p2_equipo5;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,7 +17,7 @@ public class Lab4P2_Equipo5 {
 
     static Scanner leer = new Scanner(System.in);
     static ArrayList<Entrenador> entrenadores = new ArrayList();
-    static ArrayList<Movimiento> moveset = new ArrayList();
+    static ArrayList<Movimiento> moves = new ArrayList();
 
     /**
      * @param args the command line arguments
@@ -65,7 +67,8 @@ public class Lab4P2_Equipo5 {
                             System.out.println("2. Entrenar Pokemon");
                             System.out.println("Escoja una opcion");
                             int opcion1 = leer.nextInt();
-                            Entrenador p = new Entrenador();
+                            Entrenador e = new Entrenador();
+                            Pokemon p = new Pokemon();
                             Movimiento m;
                             switch (opcion1) {
                                 case 1: {
@@ -75,23 +78,47 @@ public class Lab4P2_Equipo5 {
                                     int nivel = leer.nextInt();
                                     System.out.println("Ingrese el EXP que tiene el Pokemon");
                                     int EXP = leer.nextInt();
+                                    System.out.println("Ingrese el EXP que necesita para subir de nivel");
+                                    int EXP_necesario=leer.nextInt();                                                                        
+                                    System.out.println("Ingrese el HP del Pokemon");
+                                    int hp=leer.nextInt();
+                                    System.out.println("Ingrese el ataque del Pokemon");
+                                    int atk=leer.nextInt();
+                                    System.out.println("Ingrese la defensa del Pokemon");
+                                    int def=leer.nextInt();
+                                    System.out.println("Ingrese el especial del Pokemon");
+                                    int sp=leer.nextInt();
+                                    System.out.println("Ingrse la velocidad del pokemon");
+                                    int spe=leer.nextInt();
+                                    
                                     System.out.println("Que Movimientos quiere agregar al Pokemon");
                                     System.out.println("Estos son los movimientos disponibles");
                                     listarMovimientos();
                                     System.out.println("Escoja el movimiento");
                                     int indexMov = leer.nextInt();
-                                    if (indexMov >= 1 && indexMov <= moveset.size()) {
-                                        
+                                    if (indexMov >= 1 && indexMov <= moves.size()) {
+                                        int cont=0;
+                                        while (cont<4) {                                            
+                                           p.getMoveset()[cont]=moves.get(indexMov);
+                                           cont++;
+                                        }
                                         System.out.println("Movimiento agregado exitosamente");
                                     } else {
                                         System.out.println("Indice no encontrado dentro de los movimientos");
+                                        break;
                                     }
+                                    
+                                try {
+                                    e.PokemonalTeam(new Pokemon(nombre, nivel, EXP, EXP_necesario, hp, atk, def, sp, spe, "Neutral"));
+                                } catch (Exception ex) {
+                                    System.out.println("No caben más Pokemon en el array");
+                                }
 
                                     break;
                                 }
 
                                 case 2: {
-                                    if (p.getPC().isEmpty() && p.getTeam() == null) {
+                                    if (e.getPC().isEmpty() && e.getTeam() == null) {
                                         System.out.println("No tiene Pokemon para entrenar");
                                         break;
                                     } else {
@@ -137,7 +164,7 @@ public class Lab4P2_Equipo5 {
 
     public static void listarMovimientos() {
         int p = 1;
-        for (Movimiento Mov : moveset) {
+        for (Movimiento Mov : moves) {
             System.out.println("Movimiento #" + p);
             System.out.println("Nombre del Movimiento " + Mov.getNombre());
             System.out.println("Descripcion del Movimiento " + Mov.getDescripcion());
