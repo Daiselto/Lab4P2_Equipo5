@@ -87,7 +87,7 @@ public class Especial extends Movimiento {
         
         }
         
-      
+        return resultado_hp;
     }
     
     
