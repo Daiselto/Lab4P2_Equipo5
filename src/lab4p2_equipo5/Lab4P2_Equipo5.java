@@ -137,6 +137,60 @@ public class Lab4P2_Equipo5 {
                 }
 
                 case 4: {
+                    
+                    System.out.println("Ingrese el nombre del Movimiento: ");
+                    String nombre= leer.next();
+                    leer.nextLine();
+                    System.out.println("Ingrese la descripcion del Movimiento");
+                    
+                    String descripcion= leer.nextLine();
+                    leer.next();
+                    
+                    System.out.println("Que tipo de ataque va a agregar:");
+                    System.out.println("1. Estado");
+                    System.out.println("2. Fisico");
+                    System.out.println("3. Especial");
+                    int ataque= leer.nextInt();
+                    
+                    switch (ataque) {
+                        case 1:
+                            System.out.println("Ingrese el estado del problema de su ataque Estado: ");
+                            String estado_problema = leer.nextLine();
+                            leer.next();
+                            if (estado_problema.equalsIgnoreCase("dormido")||estado_problema.equalsIgnoreCase("evenenado")||estado_problema.equalsIgnoreCase("paralizado")||estado_problema.equalsIgnoreCase("quemado")||estado_problema.equalsIgnoreCase("neutral")) {
+                                 moves.add(new Estado(estado_problema, nombre, descripcion));
+                            }else{
+                            
+                                System.out.println("Ingrese de sus estados actuales (dormido/evenenado/paralizado/quemado/ neutral)");
+                            }
+                            
+                          
+                        
+                            break;
+                            
+                        case 2:
+                            System.out.println("Ingrese los puntos de poder de su ataque Fisico:");
+                            int puntos_fisico= leer.nextInt();
+                            System.out.println("Ingrese la precision de su ataque Fisico:");
+                            int precision_fisico= leer.nextInt();
+                            
+                            moves.add(new Fisico(puntos_fisico, precision_fisico, nombre, descripcion));
+                            
+                            break;
+                            
+                        case 3:
+                            System.out.println("Ingrese los puntos de poder de su ataque Especial:");
+                            int puntos_especial= leer.nextInt();
+                            System.out.println("Ingrese la precision de su ataque Especial:");
+                            int precision_especial= leer.nextInt();
+                            
+                            moves.add(new Especial(puntos_especial, precision_especial, nombre, descripcion));
+                            break;
+                        default:
+                            System.out.println("Ingrese de las opciones dadas");
+                    }
+                       
+                    
                     break;
                 }
 
