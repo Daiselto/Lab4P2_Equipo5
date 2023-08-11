@@ -11,10 +11,12 @@ import java.util.ArrayList;
  * @author HP
  */
 public class Entrenador {
+
     private String Nombre;
     private int Edad, Dinero;
-    private Pokemon[] Team= new Pokemon[5];
+    private Pokemon[] Team = new Pokemon[5];
     private ArrayList<Pokemon> PC = new ArrayList();
+    private int Posicion=0;
 
     public Entrenador() {
     }
@@ -24,13 +26,20 @@ public class Entrenador {
         this.Edad = Edad;
         this.Dinero = Dinero;
     }
-    
+
     public Entrenador(String Nombre, int Edad, int Dinero, Pokemon[] Team, ArrayList<Pokemon> PC) {
         this.Nombre = Nombre;
         this.Edad = Edad;
         this.Dinero = Dinero;
-        this.Team=Team;
-        this.PC=PC;
+        this.Team = Team;
+        this.PC = PC;
+    }
+
+    public Entrenador(String Nombre, int Edad, int Dinero, int Posicion) {
+        this.Nombre = Nombre;
+        this.Edad = Edad;
+        this.Dinero = Dinero;
+        this.Posicion = Posicion;
     }
 
     public String getNombre() {
@@ -72,23 +81,24 @@ public class Entrenador {
     public void setPC(ArrayList<Pokemon> PC) {
         this.PC = PC;
     }
-    
-    public void PokemonalPC(Pokemon Pokemon){
+
+    public void PokemonalPC(Pokemon Pokemon) {
         PC.add(Pokemon);
     }
-    
-    /*public void PokemonalTeam(Pokemon Pokemon){
-        for (int i = 0; i < Team.length ; i++) {
-            if () {
-                
-            }
+
+    public void PokemonalTeam(Pokemon Pokemon) throws Exception {
+        if (Posicion<Team.length) {
+            Team[Posicion]=Pokemon;
+            Posicion++;
+        }else{
+            throw new Exception("Ya no caben más Pokemon en el team");
         }
-    }*/
+
+    }
 
     @Override
     public String toString() {
         return "Entrenador{" + "Nombre=" + Nombre + ", Edad=" + Edad + ", Dinero=" + Dinero + ", Team=" + Team + ", PC=" + PC + '}';
     }
-    
-    
+
 }
