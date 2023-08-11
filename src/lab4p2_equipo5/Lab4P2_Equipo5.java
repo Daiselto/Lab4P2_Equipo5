@@ -6,8 +6,7 @@ package lab4p2_equipo5;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Random;
 
 /**
  *
@@ -18,6 +17,7 @@ public class Lab4P2_Equipo5 {
     static Scanner leer = new Scanner(System.in);
     static ArrayList<Entrenador> entrenadores = new ArrayList();
     static ArrayList<Movimiento> moves = new ArrayList();
+    static Random rng= new Random();
 
     /**
      * @param args the command line arguments
@@ -79,40 +79,40 @@ public class Lab4P2_Equipo5 {
                                     System.out.println("Ingrese el EXP que tiene el Pokemon");
                                     int EXP = leer.nextInt();
                                     System.out.println("Ingrese el EXP que necesita para subir de nivel");
-                                    int EXP_necesario=leer.nextInt();                                                                        
+                                    int EXP_necesario = leer.nextInt();
                                     System.out.println("Ingrese el HP del Pokemon");
-                                    int hp=leer.nextInt();
+                                    int hp = leer.nextInt();
                                     System.out.println("Ingrese el ataque del Pokemon");
-                                    int atk=leer.nextInt();
+                                    int atk = leer.nextInt();
                                     System.out.println("Ingrese la defensa del Pokemon");
-                                    int def=leer.nextInt();
+                                    int def = leer.nextInt();
                                     System.out.println("Ingrese el especial del Pokemon");
-                                    int sp=leer.nextInt();
+                                    int sp = leer.nextInt();
                                     System.out.println("Ingrse la velocidad del pokemon");
-                                    int spe=leer.nextInt();
-                                    
+                                    int spe = leer.nextInt();
+
                                     System.out.println("Que Movimientos quiere agregar al Pokemon");
                                     System.out.println("Estos son los movimientos disponibles");
                                     listarMovimientos();
                                     System.out.println("Escoja el movimiento");
                                     int indexMov = leer.nextInt();
                                     if (indexMov >= 1 && indexMov <= moves.size()) {
-                                        int cont=0;
-                                        while (cont<4) {                                            
-                                           p.getMoveset()[cont]=moves.get(indexMov);
-                                           cont++;
+                                        int cont = 0;
+                                        while (cont < 4) {
+                                            p.getMoveset()[cont] = moves.get(indexMov);
+                                            cont++;
                                         }
                                         System.out.println("Movimiento agregado exitosamente");
                                     } else {
                                         System.out.println("Indice no encontrado dentro de los movimientos");
                                         break;
                                     }
-                                    
-                                try {
-                                    e.PokemonalTeam(new Pokemon(nombre, nivel, EXP, EXP_necesario, hp, atk, def, sp, spe, "Neutral"));
-                                } catch (Exception ex) {
-                                    System.out.println("No caben más Pokemon en el array");
-                                }
+
+                                    try {
+                                        e.PokemonalTeam(new Pokemon(nombre, nivel, EXP, EXP_necesario, 0, hp, atk, def, sp, spe, nombre));
+                                    } catch (Exception ex) {
+                                        System.out.println("No caben más Pokemon en el array");
+                                    }
 
                                     break;
                                 }
@@ -122,7 +122,7 @@ public class Lab4P2_Equipo5 {
                                         System.out.println("No tiene Pokemon para entrenar");
                                         break;
                                     } else {
-
+                                        System.out.println("Cual Pokemon desea entrenar");
                                     }
                                     break;
                                 }
@@ -137,60 +137,58 @@ public class Lab4P2_Equipo5 {
                 }
 
                 case 4: {
-                    
+
                     System.out.println("Ingrese el nombre del Movimiento: ");
-                    String nombre= leer.next();
+                    String nombre = leer.next();
                     leer.nextLine();
                     System.out.println("Ingrese la descripcion del Movimiento");
-                    
-                    String descripcion= leer.nextLine();
+
+                    String descripcion = leer.nextLine();
                     leer.next();
-                    
+
                     System.out.println("Que tipo de ataque va a agregar:");
                     System.out.println("1. Estado");
                     System.out.println("2. Fisico");
                     System.out.println("3. Especial");
-                    int ataque= leer.nextInt();
-                    
+                    int ataque = leer.nextInt();
+
                     switch (ataque) {
                         case 1:
                             System.out.println("Ingrese el estado del problema de su ataque Estado: ");
                             String estado_problema = leer.nextLine();
                             leer.next();
-                            if (estado_problema.equalsIgnoreCase("dormido")||estado_problema.equalsIgnoreCase("evenenado")||estado_problema.equalsIgnoreCase("paralizado")||estado_problema.equalsIgnoreCase("quemado")||estado_problema.equalsIgnoreCase("neutral")) {
-                                 moves.add(new Estado(estado_problema, nombre, descripcion));
-                            }else{
-                            
+                            if (estado_problema.equalsIgnoreCase("dormido") || estado_problema.equalsIgnoreCase("evenenado") || estado_problema.equalsIgnoreCase("paralizado") || estado_problema.equalsIgnoreCase("quemado") || estado_problema.equalsIgnoreCase("neutral")) {
+                                moves.add(new Estado(estado_problema, nombre, descripcion));
+                            } else {
+
                                 System.out.println("Ingrese de sus estados actuales (dormido/evenenado/paralizado/quemado/ neutral)");
                             }
-                            
-                          
-                        
+
                             break;
-                            
+
                         case 2:
                             System.out.println("Ingrese los puntos de poder de su ataque Fisico:");
-                            int puntos_fisico= leer.nextInt();
+                            int puntos_fisico = leer.nextInt();
                             System.out.println("Ingrese la precision de su ataque Fisico:");
-                            int precision_fisico= leer.nextInt();
-                            
+                            int precision_fisico = leer.nextInt();
+
                             moves.add(new Fisico(puntos_fisico, precision_fisico, nombre, descripcion));
-                            
+
                             break;
-                            
+
                         case 3:
                             System.out.println("Ingrese los puntos de poder de su ataque Especial:");
-                            int puntos_especial= leer.nextInt();
+                            int puntos_especial = leer.nextInt();
                             System.out.println("Ingrese la precision de su ataque Especial:");
-                            int precision_especial= leer.nextInt();
-                            
+                            int precision_especial = leer.nextInt();
+
                             moves.add(new Especial(puntos_especial, precision_especial, nombre, descripcion));
                             break;
                         default:
                             System.out.println("Ingrese de las opciones dadas");
+                            break;
                     }
-                       
-                    
+
                     break;
                 }
 
@@ -226,4 +224,6 @@ public class Lab4P2_Equipo5 {
             p++;
         }
     }
+    
+    
 }//fin clase

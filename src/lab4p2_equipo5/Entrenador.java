@@ -14,7 +14,7 @@ public class Entrenador {
 
     private String Nombre;
     private int Edad, Dinero;
-    private Pokemon[] Team = new Pokemon[5];
+    private Pokemon[] Team = new Pokemon[6];
     private ArrayList<Pokemon> PC = new ArrayList();
     private int Posicion=0;
 
@@ -95,6 +95,8 @@ public class Entrenador {
         }
 
     }
+    
+    
 
     @Override
     public String toString() {
