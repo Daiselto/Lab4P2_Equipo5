@@ -10,19 +10,20 @@ package lab4p2_equipo5;
  */
 public class Pokemon {
     private String Especie;
-    private int Nivel, EXP, EXP_Necesario, HP, ATK, DEF, SP, SPE;
-    private Movimiento[] Moveset = new Movimiento[3];
+    private int Nivel, EXP, EXP_Necesario, EXP_Actual, HP, ATK, DEF, SP, SPE;
+    private Movimiento[] Moveset = new Movimiento[4];
     private String Estado;
     private int Posicion=0;
 
     public Pokemon() {
     }
 
-    public Pokemon(String Especie, int Nivel, int EXP, int EXP_Necesario, int HP, int ATK, int DEF, int SP, int SPE, String Estado) {
+    public Pokemon(String Especie, int Nivel, int EXP, int EXP_Necesario, int EXP_Actual, int HP, int ATK, int DEF, int SP, int SPE, String Estado) {
         this.Especie = Especie;
         this.Nivel = Nivel;
         this.EXP = EXP;
         this.EXP_Necesario = EXP_Necesario;
+        this.EXP_Actual = EXP_Actual;
         this.HP = HP;
         this.ATK = ATK;
         this.DEF = DEF;
@@ -30,6 +31,7 @@ public class Pokemon {
         this.SPE = SPE;
         this.Estado = Estado;
     }
+    
     
     public Pokemon(String Especie, int Nivel, int EXP, int EXP_Necesario, int HP, int ATK, int DEF, int SP, int SPE, String Estado, Movimiento[] Moveset) {
         this.Especie = Especie;
@@ -134,8 +136,16 @@ public class Pokemon {
     public void setEstado(String Estado) {
         this.Estado = Estado;
     }
-    
-    public void PokemonalTeam(Movimiento Movimiento) throws Exception {
+
+    public int getEXP_Actual() {
+        return EXP_Actual;
+    }
+
+    public void setEXP_Actual(int EXP_Actual) {
+        this.EXP_Actual = EXP_Actual;
+    }
+       
+    public void MovimientoalPKMN(Movimiento Movimiento) throws Exception {
         if (Posicion<Moveset.length) {
             Moveset[Posicion]=Movimiento;
             Posicion++;
