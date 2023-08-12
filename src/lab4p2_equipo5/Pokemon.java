@@ -145,6 +145,16 @@ public class Pokemon {
         }
 
     }
+    
+    public void añadirMoveset(Movimiento movimiento) throws Exception {
+        if (Posicion<Moveset.length) {
+            Moveset[Posicion]=movimiento;
+            Posicion++;
+        }else{
+            throw new Exception("Ya no caben más movimientos");
+        }
+
+    }
 
     @Override
     public String toString() {

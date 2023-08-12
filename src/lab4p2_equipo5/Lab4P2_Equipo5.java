@@ -22,7 +22,7 @@ public class Lab4P2_Equipo5 {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         boolean seguir = true;
         while (seguir) {
             System.out.println("Bienvenido al Pokemon Rojo Fuego (Yo que sé)");
@@ -51,6 +51,7 @@ public class Lab4P2_Equipo5 {
 
                     Pokemon p1 = new Pokemon();
                     Pokemon p2 = new Pokemon();
+
                     Entrenador entrenador1 = new Entrenador();
                     Entrenador entrenador2 = new Entrenador();
                     listarEntrenadores();
@@ -73,12 +74,12 @@ public class Lab4P2_Equipo5 {
                         System.out.println("Elija cual pokemon usar:");
                         int pokemon1 = leer.nextInt();
 
-                        if (pokemon1 >= 1 && pokemon1 <= 6) {
+                        if (pokemon1 >= 1 || pokemon1 <= 6) {
 
                             p1 = entrenador1.getTeam()[pokemon1 - 1];
                         } else {
 
-                            System.out.println("Su pokemon nno esta en la lista");
+                            System.out.println("Su pokemon no esta en la lista");
 
                         }
 
@@ -88,7 +89,7 @@ public class Lab4P2_Equipo5 {
                         System.out.println("Elija cual pokemon usar:");
                         int pokemon2 = leer.nextInt();
 
-                        if (pokemon2 >= 1 && pokemon2 <= 6) {
+                        if (pokemon2 >= 1 || pokemon2 <= 6) {
 
                             p2 = entrenador2.getTeam()[pokemon2 - 1];
                         } else {
@@ -97,7 +98,7 @@ public class Lab4P2_Equipo5 {
 
                         }
 
-                        while (p1.getHP() > 0 && p2.getHP() > 0) {
+                        while (p1.getHP() > 0 || p2.getHP() > 0) {
 
                             if (p1.getSPE() > p2.getSPE()) {
                                 System.out.println(p1.printArray(p1.getMoveset()));
@@ -140,8 +141,8 @@ public class Lab4P2_Equipo5 {
 
                         if (p1.getHP() <= 0) {
                             System.out.println("El ganador es " + entrenador2.getNombre());
-                            
-                        }else{
+
+                        } else {
                             System.out.println("El ganador es " + entrenador1.getNombre());
                         }
 
@@ -201,12 +202,22 @@ public class Lab4P2_Equipo5 {
                                     System.out.println("Escoja el movimiento");
                                     int indexMov = leer.nextInt();
                                     if (indexMov >= 1 && indexMov <= moves.size()) {
-                                        int cont = 0;
+                                        
+                                        /*int cont = 0;
                                         while (cont < 4) {
                                             p.getMoveset()[cont] = moves.get(indexMov - 1);
                                             cont++;
+                                        }*/
+                                        
+                                        if (moves.get(indexMov-1) instanceof Estado) {
+                                            p.añadirMoveset(moves.get(indexMov-1));
+                                        }else if(moves.get(indexMov-1) instanceof Especial){
+                                            p.añadirMoveset(moves.get(indexMov-1));
+                                        }else if (moves.get(indexMov-1) instanceof Fisico) {
+                                            p.añadirMoveset(moves.get(indexMov-1));
                                         }
                                         System.out.println("Movimiento agregado exitosamente");
+                                        
                                     } else {
                                         System.out.println("Indice no encontrado dentro de los movimientos");
                                         break;
