@@ -129,22 +129,45 @@ public class Lab4P2_Equipo5 {
                                         int opcion3 = leer.nextInt();
                                         switch (opcion3) {
                                             case 1: {
+                                                 System.out.println("Estos son los Pokemon disponibles");
+                                                 int a=1;
+                                                 for (Pokemon entre : e.getPC()) {
+                                                     System.out.println("Pokemon #"+a);
+                                                     System.out.println("Nombre del Pokemon " + entre.getEspecie());
+                                                     System.out.println("");
+                                                }
+                                                System.out.println("Escoja el Pokemon que desea");
+                                                int indexPKMN = leer.nextInt();
+                                                if (indexPKMN>=1&&indexPKMN<=e.getPC().size()) {
+                                                    Pokemon p1 = e.getTeam()[indexPKMN-1];
+                                                    int ran1 = rng.nextInt(2);
+                                                    int ran2 = 100 + rng.nextInt(4999);
+                                                    
+                                                    int niv_subidos=(ran2/p1.getEXP_Necesario())*ran1;
+                                                    System.out.println("Ha subido estos niveles " + niv_subidos);
+                                                    int nivel_total=p1.getNivel()+niv_subidos;
+                                                    System.out.println("Su nivel actual es " + nivel_total);
+                                                }
+                                                 
+                                                break;
+                                            }
+
+                                            case 2: {
                                                 System.out.println("Estos son los Pokemon disponibles");
                                                 System.out.println(printArray(e.getTeam()));
                                                 System.out.println("Escoja el Pokemon que desea escoger");
                                                 int indexPKMN = leer.nextInt();
 
                                                 if (indexPKMN >= 1 && indexPKMN <= 6) {
-
+                                                    Pokemon p1 = e.getTeam()[indexPKMN-1];
                                                     int ran1 = rng.nextInt(2);
                                                     int ran2 = 100 + rng.nextInt(4999);
-
+                                                    
+                                                    int niv_subidos=(ran2/p1.getEXP_Necesario())*ran1;
+                                                    System.out.println("Ha subido estos niveles " + niv_subidos);
+                                                    int nivel_total=p1.getNivel()+niv_subidos;
+                                                    System.out.println("Su nivel actual es " + nivel_total);
                                                 }
-                                                break;
-                                            }
-
-                                            case 2: {
-                                                System.out.println("Estos son los Pokemon Disponibles");
                                                 break;
                                             }
                                         }
