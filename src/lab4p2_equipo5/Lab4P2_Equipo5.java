@@ -90,7 +90,7 @@ public class Lab4P2_Equipo5 {
 
                         if (pokemon2 >= 1 && pokemon2 <= 6) {
 
-                            p2 = entrenador1.getTeam()[pokemon1 - 1];
+                            p2 = entrenador2.getTeam()[pokemon2 - 1];
                         } else {
 
                             System.out.println("Su pokemon no esta en la lista");
