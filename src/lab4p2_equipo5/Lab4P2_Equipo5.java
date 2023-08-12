@@ -48,83 +48,109 @@ public class Lab4P2_Equipo5 {
                 }
 
                 case 2: {
-                    
-                    Pokemon p1= new Pokemon();
-                    Pokemon p2= new Pokemon();
+
+                    Pokemon p1 = new Pokemon();
+                    Pokemon p2 = new Pokemon();
+                    Entrenador entrenador1 = new Entrenador();
+                    Entrenador entrenador2 = new Entrenador();
                     listarEntrenadores();
                     System.out.println("Seleccione el primer entrenador: ");
-                    int primer_entrenador= leer.nextInt();
+                    int primer_entrenador = leer.nextInt();
                     System.out.println("Seleccion el segundo entrenador: ");
-                    int segundo_entrenador= leer.nextInt();
-                    
-                    if ((primer_entrenador>=1 && primer_entrenador<=entrenadores.size()) && (segundo_entrenador>=1 && segundo_entrenador<=entrenadores.size())) {
-                        
-                        Entrenador entrenador1=entrenadores.get(primer_entrenador-1);
-                        Entrenador entrenador2=entrenadores.get(segundo_entrenador-1);
-                        
-                        System.out.println("Su entrenador 1 es: "+entrenador1.getNombre());
-                        System.out.println("Su entrenador 1 es: "+entrenador2.getNombre());
-                        
+                    int segundo_entrenador = leer.nextInt();
+
+                    if ((primer_entrenador >= 1 && primer_entrenador <= entrenadores.size()) && (segundo_entrenador >= 1 && segundo_entrenador <= entrenadores.size())) {
+
+                        entrenador1 = entrenadores.get(primer_entrenador - 1);
+                        entrenador2 = entrenadores.get(segundo_entrenador - 1);
+
+                        System.out.println("Su entrenador 1 es: " + entrenador1.getNombre());
+                        System.out.println("Su entrenador 1 es: " + entrenador2.getNombre());
+
                         System.out.println("Los Pokemones del primer entrenador son");
                         System.out.println(printArray(entrenador1.getTeam()));
                         System.out.println();
                         System.out.println("Elija cual pokemon usar:");
-                        int pokemon1= leer.nextInt();
-                        
-                         if (pokemon1>=1 && pokemon1<=6){
-                         
-                          p1= entrenador1.getTeam()[pokemon1-1];
-                         }else{
-                         
-                             System.out.println("Su pokemon nno esta en la lista");
-                         
-                         } 
-                        
-                         System.out.println("Los Pokemones del seguno entrenador son");
+                        int pokemon1 = leer.nextInt();
+
+                        if (pokemon1 >= 1 && pokemon1 <= 6) {
+
+                            p1 = entrenador1.getTeam()[pokemon1 - 1];
+                        } else {
+
+                            System.out.println("Su pokemon nno esta en la lista");
+
+                        }
+
+                        System.out.println("Los Pokemones del seguno entrenador son");
                         System.out.println(printArray(entrenador2.getTeam()));
                         System.out.println();
                         System.out.println("Elija cual pokemon usar:");
-                        int pokemon2= leer.nextInt();
-                        
-                         if (pokemon2>=1 && pokemon2<=6){
-                         
-                          p2= entrenador1.getTeam()[pokemon1-1];
-                         }else{
-                         
-                             System.out.println("Su pokemon no esta en la lista");
-                         
-                         } 
-                        
-                        
-                         while (p1.getHP()>0 && p2.getHP()>0){
-                    
-                                if (p1.getSPE()>p2.getSPE()) {
-                                    System.out.println(p1.printArray(p1.getMoveset()));
-                                     System.out.println("Elegir el movimiento que va a usar para el Pokemon: ");
-                                     int movimiento= leer.nextInt();
-                                        Movimiento m=p1.getMoveset()[movimiento-1];
-                                     if (movimiento >=1 && movimiento<=4) {
-                                         if (m instanceof Estado) {
-                                             m.ataque();
-                                         }else if(m instanceof Fisico){
-                                         
-                                         m.ataque();
-                                         }else if(m instanceof Especial){
-                                         
-                                          m.ataque();
-                                         
-                                         }
-                                    } 
-                             } 
+                        int pokemon2 = leer.nextInt();
+
+                        if (pokemon2 >= 1 && pokemon2 <= 6) {
+
+                            p2 = entrenador1.getTeam()[pokemon1 - 1];
+                        } else {
+
+                            System.out.println("Su pokemon no esta en la lista");
+
+                        }
+
+                        while (p1.getHP() > 0 && p2.getHP() > 0) {
+
+                            if (p1.getSPE() > p2.getSPE()) {
+                                System.out.println(p1.printArray(p1.getMoveset()));
+                                System.out.println("Elegir el movimiento que va a usar para el Pokemon: ");
+                                int movimiento = leer.nextInt();
+                                Movimiento m = p1.getMoveset()[movimiento - 1];
+                                if (movimiento >= 1 && movimiento <= 4) {
+                                    if (m instanceof Estado) {
+                                        int resta = m.ataque() - p2.getHP();
+                                        p2.setHP(resta);
+                                    } else if (m instanceof Fisico) {
+                                        int resta = m.ataque() - p2.getHP();
+                                        p2.setHP(resta);
+                                    } else if (m instanceof Especial) {
+                                        int resta = m.ataque() - p2.getHP();
+                                        p2.setHP(resta);
+
+                                    }
+                                }
+                            } else if (p2.getSPE() > p1.getSPE()) {
+                                System.out.println(p2.printArray(p2.getMoveset()));
+                                System.out.println("Elegir el movimiento que va a usar para el Pokemon: ");
+                                int movimiento = leer.nextInt();
+                                Movimiento m = p2.getMoveset()[movimiento - 1];
+                                if (movimiento >= 1 && movimiento <= 4) {
+                                    if (m instanceof Estado) {
+                                        int resta = m.ataque() - p2.getHP();
+                                        p1.setHP(resta);
+                                    } else if (m instanceof Fisico) {
+                                        int resta = m.ataque() - p2.getHP();
+                                        p1.setHP(resta);
+                                    } else if (m instanceof Especial) {
+                                        int resta = m.ataque() - p2.getHP();
+                                        p1.setHP(resta);
+
+                                    }
+                                }
+                            }
+                        }
+
+                        if (p1.getHP() <= 0) {
+                            System.out.println("El ganador es " + entrenador2.getNombre());
+                            
+                        }else{
+                            System.out.println("El ganador es " + entrenador1.getNombre());
+                        }
+
+                    } else {
+
+                        System.out.println("Entrenadores fuera del rango");
+
                     }
 
-                    }else{
-                    
-                        System.out.println("Entrenadores fuera del rango");
-                    
-                    }
-                    
-                   
                     break;
                 }
 
@@ -206,26 +232,26 @@ public class Lab4P2_Equipo5 {
                                         int opcion3 = leer.nextInt();
                                         switch (opcion3) {
                                             case 1: {
-                                                 System.out.println("Estos son los Pokemon disponibles");
-                                                 int a=1;
-                                                 for (Pokemon entre : e.getPC()) {
-                                                     System.out.println("Pokemon #"+a);
-                                                     System.out.println("Nombre del Pokemon " + entre.getEspecie());
-                                                     System.out.println("");
+                                                System.out.println("Estos son los Pokemon disponibles");
+                                                int a = 1;
+                                                for (Pokemon entre : e.getPC()) {
+                                                    System.out.println("Pokemon #" + a);
+                                                    System.out.println("Nombre del Pokemon " + entre.getEspecie());
+                                                    System.out.println("");
                                                 }
                                                 System.out.println("Escoja el Pokemon que desea");
                                                 int indexPKMN = leer.nextInt();
-                                                if (indexPKMN>=1&&indexPKMN<=e.getPC().size()) {
-                                                    Pokemon p1 = e.getTeam()[indexPKMN-1];
+                                                if (indexPKMN >= 1 && indexPKMN <= e.getPC().size()) {
+                                                    Pokemon p1 = e.getTeam()[indexPKMN - 1];
                                                     int ran1 = rng.nextInt(2);
                                                     int ran2 = 100 + rng.nextInt(4999);
-                                                    
-                                                    int niv_subidos=(ran2/p1.getEXP_Necesario())*ran1;
+
+                                                    int niv_subidos = (ran2 / p1.getEXP_Necesario()) * ran1;
                                                     System.out.println("Ha subido estos niveles " + niv_subidos);
-                                                    int nivel_total=p1.getNivel()+niv_subidos;
+                                                    int nivel_total = p1.getNivel() + niv_subidos;
                                                     System.out.println("Su nivel actual es " + nivel_total);
                                                 }
-                                                 
+
                                                 break;
                                             }
 
@@ -236,13 +262,13 @@ public class Lab4P2_Equipo5 {
                                                 int indexPKMN = leer.nextInt();
 
                                                 if (indexPKMN >= 1 && indexPKMN <= 6) {
-                                                    Pokemon p1 = e.getTeam()[indexPKMN-1];
+                                                    Pokemon p1 = e.getTeam()[indexPKMN - 1];
                                                     int ran1 = rng.nextInt(2);
                                                     int ran2 = 100 + rng.nextInt(4999);
-                                                    
-                                                    int niv_subidos=(ran2/p1.getEXP_Necesario())*ran1;
+
+                                                    int niv_subidos = (ran2 / p1.getEXP_Necesario()) * ran1;
                                                     System.out.println("Ha subido estos niveles " + niv_subidos);
-                                                    int nivel_total=p1.getNivel()+niv_subidos;
+                                                    int nivel_total = p1.getNivel() + niv_subidos;
                                                     System.out.println("Su nivel actual es " + nivel_total);
                                                 }
                                                 break;
@@ -276,34 +302,33 @@ public class Lab4P2_Equipo5 {
                     System.out.println("3. Especial");
                     int ataque = leer.nextInt();
 
-                  boolean correcto=false;
-                  String estado_problema;
+                    boolean correcto = false;
+                    String estado_problema;
                     switch (ataque) {
                         case 1:
-                            
+
                             System.out.println("Ingrese el estado del problema de su ataque Estado: ");
-                             estado_problema = leer.next();
+                            estado_problema = leer.next();
                             leer.nextLine();
-                           
-                            if (estado_problema.equalsIgnoreCase("dormido")||estado_problema.equalsIgnoreCase("envenenado")||estado_problema.equalsIgnoreCase("paralizado")||estado_problema.equalsIgnoreCase("quemado")||estado_problema.equalsIgnoreCase("neutral")) {
-                               correcto=true; 
-                            }else{
-                            correcto=false;
+
+                            if (estado_problema.equalsIgnoreCase("dormido") || estado_problema.equalsIgnoreCase("envenenado") || estado_problema.equalsIgnoreCase("paralizado") || estado_problema.equalsIgnoreCase("quemado") || estado_problema.equalsIgnoreCase("neutral")) {
+                                correcto = true;
+                            } else {
+                                correcto = false;
                             }
-                            
-                    
-                    while (correcto==false) {
-                        
-                        System.out.println("Tiene que ingresar de las opciones dadas");
-                         estado_problema = leer.next();
-                            leer.nextLine();
-                             if (estado_problema.equalsIgnoreCase("dormido")||estado_problema.equalsIgnoreCase("envenenado")||estado_problema.equalsIgnoreCase("paralizado")||estado_problema.equalsIgnoreCase("quemado")||estado_problema.equalsIgnoreCase("neutral")) {
-                               correcto=true; 
-                              
+
+                            while (correcto == false) {
+
+                                System.out.println("Tiene que ingresar de las opciones dadas");
+                                estado_problema = leer.next();
+                                leer.nextLine();
+                                if (estado_problema.equalsIgnoreCase("dormido") || estado_problema.equalsIgnoreCase("envenenado") || estado_problema.equalsIgnoreCase("paralizado") || estado_problema.equalsIgnoreCase("quemado") || estado_problema.equalsIgnoreCase("neutral")) {
+                                    correcto = true;
+
+                                }
+
                             }
-                            
-                    }
-                    moves.add(new Estado(estado_problema, nombre, descripcion));
+                            moves.add(new Estado(estado_problema, nombre, descripcion));
 
                             break;
 
