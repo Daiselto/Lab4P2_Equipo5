@@ -96,11 +96,20 @@ public class Entrenador {
 
     }
     
-    
+    public static String printArray(Pokemon[] Team){
+        String acum="";
+        for (int i = 0; i < Team.length; i++) {
+            acum+=Team[i] + " ";
+            
+        }
+        return acum;
+    }
 
     @Override
     public String toString() {
-        return "Entrenador{" + "Nombre=" + Nombre + ", Edad=" + Edad + ", Dinero=" + Dinero + ", Team=" + Team + ", PC=" + PC + '}';
+        return "Entrenador{" + "Nombre=" + Nombre + ", Edad=" + Edad + ", Dinero=" + Dinero + ", Team=" + printArray(Team) + ", PC=" + PC + '}';
     }
+    
+    
 
 }

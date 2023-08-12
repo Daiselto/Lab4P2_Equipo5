@@ -17,7 +17,7 @@ public class Lab4P2_Equipo5 {
     static Scanner leer = new Scanner(System.in);
     static ArrayList<Entrenador> entrenadores = new ArrayList();
     static ArrayList<Movimiento> moves = new ArrayList();
-    static Random rng= new Random();
+    static Random rng = new Random();
 
     /**
      * @param args the command line arguments
@@ -62,12 +62,13 @@ public class Lab4P2_Equipo5 {
                         System.out.println("Escoja el entrenador");
                         int indexEnt = leer.nextInt();
                         if (indexEnt >= 1 && indexEnt <= entrenadores.size()) {
+                            Entrenador e = entrenadores.get(indexEnt - 1);
                             System.out.println("Que desea hacer?");
                             System.out.println("1. Capturar Pokemon");
                             System.out.println("2. Entrenar Pokemon");
                             System.out.println("Escoja una opcion");
                             int opcion1 = leer.nextInt();
-                            Entrenador e = new Entrenador();
+
                             Pokemon p = new Pokemon();
                             Movimiento m;
                             switch (opcion1) {
@@ -99,7 +100,7 @@ public class Lab4P2_Equipo5 {
                                     if (indexMov >= 1 && indexMov <= moves.size()) {
                                         int cont = 0;
                                         while (cont < 4) {
-                                            p.getMoveset()[cont] = moves.get(indexMov);
+                                            p.getMoveset()[cont] = moves.get(indexMov - 1);
                                             cont++;
                                         }
                                         System.out.println("Movimiento agregado exitosamente");
@@ -109,7 +110,7 @@ public class Lab4P2_Equipo5 {
                                     }
 
                                     try {
-                                        e.PokemonalTeam(new Pokemon(nombre, nivel, EXP, EXP_necesario, 0, hp, atk, def, sp, spe, nombre));
+                                        e.PokemonalTeam(new Pokemon(nombre, nivel, EXP, EXP_necesario, hp, atk, def, sp, spe, nombre));
                                     } catch (Exception ex) {
                                         System.out.println("No caben más Pokemon en el array");
                                     }
@@ -122,7 +123,32 @@ public class Lab4P2_Equipo5 {
                                         System.out.println("No tiene Pokemon para entrenar");
                                         break;
                                     } else {
-                                        System.out.println("Cual Pokemon desea entrenar");
+                                        System.out.println("El pokemon está en la caja o en el team");
+                                        System.out.println("1. Caja");
+                                        System.out.println("2. Team");
+                                        int opcion3 = leer.nextInt();
+                                        switch (opcion3) {
+                                            case 1: {
+                                                System.out.println("Estos son los Pokemon disponibles");
+                                                System.out.println(printArray(e.getTeam()));
+                                                System.out.println("Escoja el Pokemon que desea escoger");
+                                                int indexPKMN = leer.nextInt();
+
+                                                if (indexPKMN >= 1 && indexPKMN <= 6) {
+
+                                                    int ran1 = rng.nextInt(2);
+                                                    int ran2 = 100 + rng.nextInt(4999);
+
+                                                }
+                                                break;
+                                            }
+
+                                            case 2: {
+                                                System.out.println("Estos son los Pokemon Disponibles");
+                                                break;
+                                            }
+                                        }
+
                                     }
                                     break;
                                 }
@@ -142,9 +168,7 @@ public class Lab4P2_Equipo5 {
                     String nombre = leer.next();
                     leer.nextLine();
                     System.out.println("Ingrese la descripcion del Movimiento");
-
                     String descripcion = leer.nextLine();
-                    leer.next();
 
                     System.out.println("Que tipo de ataque va a agregar:");
                     System.out.println("1. Estado");
@@ -152,17 +176,34 @@ public class Lab4P2_Equipo5 {
                     System.out.println("3. Especial");
                     int ataque = leer.nextInt();
 
+                  boolean correcto=false;
+                  String estado_problema;
                     switch (ataque) {
                         case 1:
+                            
                             System.out.println("Ingrese el estado del problema de su ataque Estado: ");
-                            String estado_problema = leer.nextLine();
-                            leer.next();
-                            if (estado_problema.equalsIgnoreCase("dormido") || estado_problema.equalsIgnoreCase("evenenado") || estado_problema.equalsIgnoreCase("paralizado") || estado_problema.equalsIgnoreCase("quemado") || estado_problema.equalsIgnoreCase("neutral")) {
-                                moves.add(new Estado(estado_problema, nombre, descripcion));
-                            } else {
-
-                                System.out.println("Ingrese de sus estados actuales (dormido/evenenado/paralizado/quemado/ neutral)");
+                             estado_problema = leer.next();
+                            leer.nextLine();
+                           
+                            if (estado_problema.equalsIgnoreCase("dormido")||estado_problema.equalsIgnoreCase("envenenado")||estado_problema.equalsIgnoreCase("paralizado")||estado_problema.equalsIgnoreCase("quemado")||estado_problema.equalsIgnoreCase("neutral")) {
+                               correcto=true; 
+                            }else{
+                            correcto=false;
                             }
+                            
+                    
+                    while (correcto==false) {
+                        
+                        System.out.println("Tiene que ingresar de las opciones dadas");
+                         estado_problema = leer.next();
+                            leer.nextLine();
+                             if (estado_problema.equalsIgnoreCase("dormido")||estado_problema.equalsIgnoreCase("envenenado")||estado_problema.equalsIgnoreCase("paralizado")||estado_problema.equalsIgnoreCase("quemado")||estado_problema.equalsIgnoreCase("neutral")) {
+                               correcto=true; 
+                              
+                            }
+                            
+                    }
+                    moves.add(new Estado(estado_problema, nombre, descripcion));
 
                             break;
 
@@ -224,6 +265,14 @@ public class Lab4P2_Equipo5 {
             p++;
         }
     }
-    
-    
+
+    public static String printArray(Pokemon[] Team) {
+        String acum = "";
+        for (int i = 0; i < Team.length; i++) {
+            acum += Team[i] + " " + "\n";
+
+        }
+        return acum;
+    }
+
 }//fin clase
