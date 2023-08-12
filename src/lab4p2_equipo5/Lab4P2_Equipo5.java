@@ -48,6 +48,83 @@ public class Lab4P2_Equipo5 {
                 }
 
                 case 2: {
+                    
+                    Pokemon p1= new Pokemon();
+                    Pokemon p2= new Pokemon();
+                    listarEntrenadores();
+                    System.out.println("Seleccione el primer entrenador: ");
+                    int primer_entrenador= leer.nextInt();
+                    System.out.println("Seleccion el segundo entrenador: ");
+                    int segundo_entrenador= leer.nextInt();
+                    
+                    if ((primer_entrenador>=1 && primer_entrenador<=entrenadores.size()) && (segundo_entrenador>=1 && segundo_entrenador<=entrenadores.size())) {
+                        
+                        Entrenador entrenador1=entrenadores.get(primer_entrenador-1);
+                        Entrenador entrenador2=entrenadores.get(segundo_entrenador-1);
+                        
+                        System.out.println("Su entrenador 1 es: "+entrenador1.getNombre());
+                        System.out.println("Su entrenador 1 es: "+entrenador2.getNombre());
+                        
+                        System.out.println("Los Pokemones del primer entrenador son");
+                        System.out.println(printArray(entrenador1.getTeam()));
+                        System.out.println();
+                        System.out.println("Elija cual pokemon usar:");
+                        int pokemon1= leer.nextInt();
+                        
+                         if (pokemon1>=1 && pokemon1<=6){
+                         
+                          p1= entrenador1.getTeam()[pokemon1-1];
+                         }else{
+                         
+                             System.out.println("Su pokemon nno esta en la lista");
+                         
+                         } 
+                        
+                         System.out.println("Los Pokemones del seguno entrenador son");
+                        System.out.println(printArray(entrenador2.getTeam()));
+                        System.out.println();
+                        System.out.println("Elija cual pokemon usar:");
+                        int pokemon2= leer.nextInt();
+                        
+                         if (pokemon2>=1 && pokemon2<=6){
+                         
+                          p2= entrenador1.getTeam()[pokemon1-1];
+                         }else{
+                         
+                             System.out.println("Su pokemon no esta en la lista");
+                         
+                         } 
+                        
+                        
+                         while (p1.getHP()>0 && p2.getHP()>0){
+                    
+                                if (p1.getSPE()>p2.getSPE()) {
+                                    System.out.println(p1.printArray(p1.getMoveset()));
+                                     System.out.println("Elegir el movimiento que va a usar para el Pokemon: ");
+                                     int movimiento= leer.nextInt();
+                                        Movimiento m=p1.getMoveset()[movimiento-1];
+                                     if (movimiento >=1 && movimiento<=4) {
+                                         if (m instanceof Estado) {
+                                             m.ataque();
+                                         }else if(m instanceof Fisico){
+                                         
+                                         m.ataque();
+                                         }else if(m instanceof Especial){
+                                         
+                                          m.ataque();
+                                         
+                                         }
+                                    } 
+                             } 
+                    }
+
+                    }else{
+                    
+                        System.out.println("Entrenadores fuera del rango");
+                    
+                    }
+                    
+                   
                     break;
                 }
 

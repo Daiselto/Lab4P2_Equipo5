@@ -151,10 +151,10 @@ public class Pokemon {
         return "Pokemon{" + "Especie=" + Especie + ", Nivel=" + Nivel + ", EXP=" + EXP + ", EXP_Necesario=" + EXP_Necesario + ", HP=" + HP + ", ATK=" + ATK + ", DEF=" + DEF + ", SP=" + SP + ", SPE=" + SPE + ", Moveset=" + printArray(Moveset) + ", Estado=" + Estado + '}';
     }
     
-    public static String printArray(Movimiento[] Moveset){
+    public  String printArray(Movimiento[] Moveset){
         String acum="";
         for (int i = 0; i < Moveset.length; i++) {
-            acum+=Moveset[i] + " ";
+            acum+=(i+1) + "-"+ Moveset[i] + " ";
             
         }
         return acum;

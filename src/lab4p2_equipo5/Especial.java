@@ -69,7 +69,7 @@ public class Especial extends Movimiento {
         Pokemon pok_especial1= new Pokemon();
         Pokemon pok_especial2= new Pokemon();
       int random1= rng.nextInt(50)+1;
-      int random2=rng.nextInt(500*100)+1;
+      int random2=rng.nextInt(500)+100;
       
       int resultado_hp=0;
       
